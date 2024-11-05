@@ -1,43 +1,74 @@
-<html>
-   <head>
-      <title>모바일/웹서비스 프로젝트</title>
-      {% load static %}
-      <link rel="stylesheet" type="text/css" href="{% static 'css/blog.css' %}">
-      <style>
-          .rounded {
-              border-radius: 10px; /* 이미지를 둥글게 */
-          }
-          .blog-image-list {
-              object-fit: contain; /* 이미지 비율 유지 */
-              width: 100%; /* 너비 100% */
-              height: auto; /* 자동 높이 조정 */
-              margin: 10px 0; /* 위아래 마진 */
-          }
-      </style>
-   </head>
-   <body>
-      <div>
-         <h1><a href="">모바일/웹서비스 프로젝트</a></h1>
-      </div>
-      <div>
-         {% block content %}
-             {% for post in posts %}
-                 <div class="post">
-                     <div class="date">
-                         {{ post.published_date }}
-                     </div>
-                     <h2><a href="">{{ post.title }}</a></h2>
-                     <p>{{ post.text|linebreaksbr }}</p>
-                     <!-- blog image -->
-                     {% if post.image %}
-                         <img src="{{ post.image.url }}" class="rounded blog-image-list" alt="{{ post.title }}">
-                         <p>Image URL: {{ post.image.url }}</p>
-                     {% else %}
-                         <p>이미지가 없습니다.</p> <!-- 이미지가 없을 때의 메시지 -->
-                     {% endif %}
-                 </div>
-             {% endfor %}
-         {% endblock %}
-      </div>
-   </body>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Blog</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff6700;
+            margin-bottom: 20px;
+        }
+        .post {
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+        }
+        .post:last-child {
+            border-bottom: none;
+        }
+        .post-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        .post-date {
+            font-size: 12px;
+            color: #888;
+            margin-top: 5px;
+        }
+        .add-button {
+            display: inline-block;
+            padding: 10px;
+            background-color: #ff6700;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            float: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            Photo Blog
+            <a href="#" class="add-button">+</a>
+        </div>
+        {% for post in posts %}
+        <div class="post">
+            <div class="post-title">{{ post.title }}</div>
+            <div class="post-date">{{ post.created_date|date:"Y년 m월 d일 H:i" }}</div>
+            <p>{{ post.text }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</body>
 </html>

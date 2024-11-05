@@ -14,7 +14,7 @@ SECRET_KEY = "django-insecure-k+wqi79lk-p45@+&0$xe68c@k9eieg@_j^fxdbtz3p)af)c)%u
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com', '1.0.0.127.in-addr.arpa', '10.0.2.2' ]
 
 
 # Application definition
@@ -27,7 +27,17 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "blog",
+    "rest_framework", # Django REST Framework 추가
+    "rest_framework_simplejwt",
+
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
